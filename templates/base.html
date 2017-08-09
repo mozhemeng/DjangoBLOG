@@ -58,11 +58,12 @@
             {% block main %}
             {% endblock main %}
         </main>
-        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+        <aside class="col-md-4 sidebar">
+{#        <div class="col-sm-3 col-sm-offset-1">#}
             {% block toc %}
             {% endblock toc %}
-            <div class="sidebar-module">
-                <h3 class="widget-title">最新文章</h3>
+            <div class="widget">
+                <h3 class="title">最新文章</h3>
                 {% get_recent_posts as recent_post_list %}
                 <ul>
                     {% for post in recent_post_list %}
@@ -76,7 +77,7 @@
             </div>
 
             <div class="widget widget-archives">
-                <h3 class="widget-title">归档</h3>
+                <h3 class="title">归档</h3>
                 {% archives as date_list %}
                 <ul>
                     {% for date in date_list %}
@@ -90,12 +91,14 @@
             </div>
 
             <div class="widget widget-category">
-                <h3 class="widget-title">分类</h3>
+                <h3 class="title">分类</h3>
                 {% get_categories as category_list %}
                 <ul>
                     {% for category in category_list %}
                     <li>
-                        <a href="{% url 'blog:category' category.pk %}">{{ category.name }} <span class="post-count">(13)</span></a>
+                        <a href="{% url 'blog:category' category.pk %}">{{ category.name }}
+                            <span class="post-count">({{ category.num_posts }})</span>
+                        </a>
                     </li>
                     {% empty %}
                     暂无分类！
@@ -104,44 +107,28 @@
             </div>
 
             <div class="widget widget-tag-cloud">
-                <h3 class="widget-title">标签云</h3>
-                <ul>
-                    <li>
-                        <a href="#">Django</a>
-                    </li>
-                    <li>
-                        <a href="#">Python</a>
-                    </li>
-                    <li>
-                        <a href="#">Java</a>
-                    </li>
-                    <li>
-                        <a href="#">笔记</a>
-                    </li>
-                    <li>
-                        <a href="#">文档</a>
-                    </li>
-                    <li>
-                        <a href="#">AngularJS</a>
-                    </li>
-                    <li>
-                        <a href="#">CSS</a>
-                    </li>
-                    <li>
-                        <a href="#">JavaScript</a>
-                    </li>
-                    <li>
-                        <a href="#">Snippet</a>
-                    </li>
-                    <li>
-                        <a href="#">jQuery</a>
-                    </li>
-                </ul>
+                <h3 class="title">标签云</h3>
+                {% get_tags as tag_list %}
+{#                <ul>#}
+{#                    {% for tag in tag_list %}#}
+{#                    <li>#}
+{#                        <a href="#">{{ tag.name }}</a>#}
+{#                    </li>#}
+{#                    {% empty %}#}
+{#                    暂无标签！#}
+{#                    {% endfor %}#}
+{#                </ul>#}
+                {% for tag in tag_list %}
+                    <span class="label label-primary">{{ tag.name }}</span>
+                {% empty %}
+                暂无标签！
+                {% endfor %}
             </div>
             <div class="rss">
                 <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
             </div>
-        </div>
+        </aside>
+{#    </div>#}
     </div>
     <footer class="footer">
         <div class="row">
