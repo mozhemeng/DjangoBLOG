@@ -3,6 +3,6 @@ from .models import Comment
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['name', 'email', 'text', 'created_time','post']
+    list_display = ['name', 'text', 'created_time','post']
 
 admin.site.register(Comment, CommentAdmin)

@@ -24,6 +24,11 @@
 {#    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>#}
 {#    <script src="{% static 'blog/js/pace.min.js' %}"></script>#}
 {#    <script src="{% static 'blog/js/modernizr.custom.js' %}"></script>#}
+    <style>
+        span.highlighted {
+            color: red;
+        }
+    </style>
 </head>
 
 <body class="home-template">
@@ -46,6 +51,17 @@
                     <li><a href="#">关于</a></li>
                     <li><a href="#">联系</a></li>
                 </ul>
+                <form role="search" method="get" id="searchform" action="{% url 'haystack_search' %}" class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="search" name="q" placeholder="关键字搜索" required class="form-control">
+                            <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><span class="ion-ios-search-strong"></span></button>
+                            </span>
+                        </div>
+                    </div>
+
+                </form>
             </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
     </nav>
@@ -109,33 +125,24 @@
             <div class="widget widget-tag-cloud">
                 <h3 class="title">标签云</h3>
                 {% get_tags as tag_list %}
-{#                <ul>#}
-{#                    {% for tag in tag_list %}#}
-{#                    <li>#}
-{#                        <a href="#">{{ tag.name }}</a>#}
-{#                    </li>#}
-{#                    {% empty %}#}
-{#                    暂无标签！#}
-{#                    {% endfor %}#}
-{#                </ul>#}
                 {% for tag in tag_list %}
-                    <span class="label label-primary">{{ tag.name }}</span>
+                    <span class="label label-primary"><a href="{% url 'blog:tag' tag.pk %}">{{ tag.name }}</a></span>
                 {% empty %}
                 暂无标签！
                 {% endfor %}
             </div>
             <div class="rss">
-                <a href=""><span class="ion-social-rss-outline"></span> RSS 订阅</a>
+                <a href="{% url 'rss' %}"><span class="ion-social-rss"></span> RSS 订阅本博客</a>
             </div>
         </aside>
 {#    </div>#}
     </div>
-    <footer class="footer">
+    <footer class="footer footer-copyright">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <span class="pull-right" ><a href="#top"><i class="ion-arrow-up-c"></i> 回到顶部</a></span>
                 <p class="copyright">
-                    &copy 2017 - MZM
+                    Copyright &copy 2017 - MZM's Blog
                 </p>
             </div>
         </div>
