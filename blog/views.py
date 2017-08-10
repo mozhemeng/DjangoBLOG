@@ -121,16 +121,3 @@ class TagView(IndexView):
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tag)
-
-
-def search(request):
-    q = request.GET.get('q')
-    error_msg = ''
-
-    if not q:
-        error_msg = '请输入关键字'
-        return render(request, 'blog/index.html', context={'error_msg': error_msg})
-
-    post_list = Post.objects.filter(Q(title__icontains=q) | Q(body__icontains=q))
-    return render(request, 'blog/index.html', context={'error_msg': error_msg,
-                                                        'post_list': post_list})
