@@ -10,7 +10,8 @@ from django.db.models import Q
 
 
 class IndexView(ListView):
-    model = Post
+    # model = Post
+    queryset = Post.published.all()
     template_name = 'blog/index.html'
     context_object_name = 'post_list'
     paginate_by = 5
