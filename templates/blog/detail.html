@@ -22,6 +22,8 @@
                 Tag : {% for tag in post.tags.all %}<a href="{% url 'blog:tag' tag.pk %}">{{ tag.name }}</a>{% endfor %}
             </div>
         </footer>
+        <br/>
+        <P><a href="{% url 'blog:email_share' post.pk %}">通过邮件分享这篇文章</a></P>
     </article>
     <section class="comment-area" id="comment-area">
         <hr>

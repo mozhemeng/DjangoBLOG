@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from .models import Post, Category, Tag
 import markdown
@@ -7,6 +7,8 @@ from django.views.generic import ListView, DetailView
 from django.utils.text import slugify
 from markdown.extensions.toc import TocExtension
 from django.db.models import Q
+from .forms import EmailForm
+from django.core.mail import send_mail
 
 
 class IndexView(ListView):
@@ -122,3 +124,20 @@ class TagView(IndexView):
     def get_queryset(self):
         tag = get_object_or_404(Tag, pk=self.kwargs.get('pk'))
         return super(TagView, self).get_queryset().filter(tags=tag)
+
+
+def email_share(request, pk):
+    post = get_object_or_404(Post, pk=pk, status=1)
+    if request.method == 'POST':
+        form = EmailForm(request.POST)
+        if form.is_valid():
+            # cleaned_data只会包含验证通过的字段
+            data = form.cleaned_data
+            post_url = request.build_absolute_uri(post.get_absolute_url())
+            subject = "{}分享给您来自 MZM's Blog 的文章:{}".format(data['name'], post.title)
+            message = "文章题目：{}\n阅读地址：{} \n分享留言:{}".format(post.title, post_url, data['comment'])
+            send_mail(subject, message, 'moflasky@163.com', [data['to']])
+            return redirect(post)
+    else:
+        form = EmailForm()
+    return render(request, 'blog/emailshare.html', {'form': form, 'post': post})

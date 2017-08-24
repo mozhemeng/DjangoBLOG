@@ -18,9 +18,9 @@ def archives():
 
 @register.simple_tag
 def get_categories():
-    return Category.objects.annotate(num_posts=Count('post')).filter(post__status=1).filter(num_posts__gt=0)
+    return Category.objects.annotate(num_posts=Count('post')).filter(num_posts__gt=0)
 
 
 @register.simple_tag
 def get_tags():
-    return Tag.objects.annotate(num_posts=Count('post')).filter(post__status=1).filter(num_posts__gt=0)
+    return Tag.objects.annotate(num_posts=Count('post')).filter(num_posts__gt=0)

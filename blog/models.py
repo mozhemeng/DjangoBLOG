@@ -11,6 +11,9 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+    def get_published_num(self):
+        return self.post_set.filter(status=1).count()
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
