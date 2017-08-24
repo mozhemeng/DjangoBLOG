@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>MZM's Blog</title>
+    <title>MZM's Blog - {% block title %}{% endblock title %}</title>
 
     <!-- meta -->
     <meta charset="UTF-8">
@@ -15,6 +15,11 @@
     <link rel="stylesheet" href="{% static 'blog/css/style.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/bootstrap-theme.css' %}">
     <link rel="stylesheet" href="{% static 'blog/css/highlights/github.css' %}">
+
+    <!-- icon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="icon">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="icon">
+
     <style>
         span.highlighted {
             color: red;
