@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}首页{% endblock title %}
+
+{% block pagehead %}
+    <h1 class="blog-title">通过电子邮件分享《{{ post.title }}》</h1>
+    <p class="lead blog-description">输入您的名字及对方的Email地址，还可以附加留言。</p>
+{% endblock pagehead %}
+
 {% block main %}
     <form action="{% url 'blog:email_share' post.pk %}" method="post" class="form-horizontal">
         {% csrf_token %}
@@ -19,7 +25,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="{{ form.comment.id_for_label }}" class="col-lg-2 control-label">附加评论：</label>
+            <label for="{{ form.comment.id_for_label }}" class="col-lg-2 control-label">附加留言：</label>
             <div class="col-lg-10">
                 <textarea class="form-control" rows="5" name="comment"></textarea>
                 {{ form.comment.errors }}

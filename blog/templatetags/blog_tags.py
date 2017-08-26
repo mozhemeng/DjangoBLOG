@@ -16,6 +16,7 @@ def archives():
     return Post.published.dates('created_time', 'month', order='DESC')
 
 
+# TODO:计算post的数量时，能否对post进行filter过滤
 @register.simple_tag
 def get_categories():
     return Category.objects.annotate(num_posts=Count('post')).filter(num_posts__gt=0)

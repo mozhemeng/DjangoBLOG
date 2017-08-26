@@ -1,5 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}首页{% endblock title %}
+
+{% block pagehead %}
+    <h1 class="blog-title">欢迎来到我的博客</h1>
+    <p class="lead blog-description">这里记录着进步的点点滴滴</p>
+{% endblock pagehead %}
+
 {% block main %}
     {% if error_msg %}
         <p>{{ error_msg }}</p>

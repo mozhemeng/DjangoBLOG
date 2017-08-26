@@ -5,7 +5,7 @@ from .models import Post, Category, Tag
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'created_time', 'modified_time', 'category', 'author']
+    list_display = ['title', 'created_time', 'modified_time', 'category', 'author', 'status']
     # 侧边栏加入分类导航
     list_filter = ['status', 'category', 'author']
     # 搜索范围加入标题

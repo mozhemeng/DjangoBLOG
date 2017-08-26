@@ -57,7 +57,7 @@
             <h3>评论列表，共 <span>{{ post.comment_set.count }}</span> 条评论</h3>
                 {% for comment in comment_list %}
                 <div class="panel panel-default">
-                    <div class="panel-heading">{{ comment.name }}： <span class="pull-right">{{ comment.created_time }}</span></div>
+                    <div class="panel-heading">{{ forloop.counter }}. {{ comment.name }}： <span class="pull-right">{{ comment.created_time }}</span></div>
                     <div class="panel-body">
                         {{ comment.text }}
                     </div>
@@ -72,6 +72,18 @@
 <div class="widget">
     <h3 class="title">文章目录</h3>
         {{ post.toc | safe }}
+</div>
+<div class="widget">
+    <h3 class="title">相关文章推荐</h3>
+    <ul>
+        {% for post in sim_post %}
+        <li>
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+        </li>
+        {% empty %}
+        暂无相关文章！
+        {% endfor %}
+    </ul>
 </div>
 {% endblock toc %}
 

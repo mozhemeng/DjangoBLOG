@@ -9,6 +9,7 @@ from markdown.extensions.toc import TocExtension
 from django.db.models import Q
 from .forms import EmailForm
 from django.core.mail import send_mail
+from django.db.models import Count
 
 
 class IndexView(ListView):
@@ -99,9 +100,14 @@ class PostDetailView(DetailView):
         context = super(PostDetailView, self).get_context_data(**kwargs)
         form = CommentForm()
         comment_list = self.object.comment_set.all()
+        # 相似博文推荐 TODO:这里逻辑还不清楚
+        tag_list = self.object.tags.values_list('pk', flat=True)
+        sim_post = Post.published.filter(tags__in=tag_list).exclude(pk=self.object.pk)
+        sim_post = sim_post.annotate(same_tag=Count('tags')).order_by('-same_tag', '-created_time')[:5]
         context.update({
             'form': form,
-            'comment_list': comment_list
+            'comment_list': comment_list,
+            'sim_post': sim_post
         })
         return context
 

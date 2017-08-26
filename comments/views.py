@@ -9,6 +9,7 @@ def post_comment(request, post_pk):
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
+            # commit=False  创建后先不提交到数据库，方便做修改
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
