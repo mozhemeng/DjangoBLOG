@@ -147,3 +147,7 @@ def email_share(request, pk):
     else:
         form = EmailForm()
     return render(request, 'blog/emailshare.html', {'form': form, 'post': post})
+
+
+def about_me(request):
+    return render(request, 'blog/aboutme.html')

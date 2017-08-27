@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'category/(?P<pk>[0-9]+)/$', views.CategoryView.as_view(), name='category'),
     url(r'tag/(?P<pk>[0-9]+)/$', views.TagView.as_view(), name='tag'),
     url(r'^post/(?P<pk>[0-9]+)/email_share/$', views.email_share, name='email_share'),
+    url(r'^about_me/$', views.about_me, name='about_me'),
 ]

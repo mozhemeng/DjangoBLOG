@@ -41,7 +41,7 @@ class Post(models.Model):
     tags = models.ManyToManyField(Tag, blank=True, verbose_name='标签云')
     author = models.ForeignKey(User, verbose_name='作者')
     views = models.PositiveIntegerField(default=0, verbose_name='浏览数')
-    status = models.IntegerField(choices=STATUS_CHOICES, default=0, verbose_name='发布状态')
+    status = models.IntegerField(choices=STATUS_CHOICES, default=1, verbose_name='发布状态')
     objects = models.Manager()
     published = PublishedManager()
 
