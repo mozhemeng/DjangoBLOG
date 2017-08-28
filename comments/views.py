@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from blog.models import Post
 from .models import Comment
 from .forms import CommentForm
+from django.contrib import messages
 
 
 def post_comment(request, post_pk):
@@ -13,6 +14,7 @@ def post_comment(request, post_pk):
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
+            messages.success(request, '回复成功！')
             return redirect(post)
         else:
             comment_list = post.comment_set.all()

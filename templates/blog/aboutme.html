@@ -19,45 +19,47 @@
 			<span class="cd-date">2017年—</span>
 		</div>
 	</div>
-	<div class="cd-timeline-block">
+	{% for tl in timelines %}
+    <div class="cd-timeline-block">
 		<div class="cd-timeline-icon">
 			<i class="ion-clock"></i>
 		</div>
 		<div class="cd-timeline-content">
-			<h2><strong>时间线</strong></h2>
-			<p>增加时间线页面，记录开发轨迹。</p>
-			<span class="cd-date">2017年8月27日</span>
+			<h2><strong>{{ tl.title }}</strong></h2>
+			<p>{{ tl.body }}</p>
+			<span class="cd-date">{{ tl.created_time }}</span>
 		</div>
 	</div>
-	<div class="cd-timeline-block">
-		<div class="cd-timeline-icon">
-			<i class="ion-clock"></i>
-		</div>
-		<div class="cd-timeline-content">
-			<h2><strong>相似文章推荐功能</strong></h2>
-			<p>增加 相似文章推荐 功能。能根据相同标签的个数，找出相似文章。</p>
-			<span class="cd-date">2017年8月25日</span>
-		</div>
-	</div>
-	<div class="cd-timeline-block">
-		<div class="cd-timeline-icon">
-			<i class="ion-clock"></i>
-		</div>
-		<div class="cd-timeline-content">
-			<h2><strong>部署上线</strong></h2>
-			<p>实现基本博客功能，上线，部署至阿里云。</p>
-			<span class="cd-date">2017年8月22日</span>
-		</div>
-	</div>
-	<div class="cd-timeline-block">
-		<div class="cd-timeline-icon">
-			<i class="ion-clock"></i>
-		</div>
-		<div class="cd-timeline-content">
-			<h2><strong>起步</strong></h2>
-			<p>开始学习Django，从零开始开发。</p>
-			<span class="cd-date">2017年8月</span>
-		</div>
-	</div>
+    {% endfor %}
+{#	<div class="cd-timeline-block">#}
+{#		<div class="cd-timeline-icon">#}
+{#			<i class="ion-clock"></i>#}
+{#		</div>#}
+{#		<div class="cd-timeline-content">#}
+{#			<h2><strong>相似文章推荐功能</strong></h2>#}
+{#			<p>增加 相似文章推荐 功能。能根据相同标签的个数，找出相似文章。</p>#}
+{#			<span class="cd-date">2017年8月25日</span>#}
+{#		</div>#}
+{#	</div>#}
+{#	<div class="cd-timeline-block">#}
+{#		<div class="cd-timeline-icon">#}
+{#			<i class="ion-clock"></i>#}
+{#		</div>#}
+{#		<div class="cd-timeline-content">#}
+{#			<h2><strong>部署上线</strong></h2>#}
+{#			<p>实现基本博客功能，上线，部署至阿里云。</p>#}
+{#			<span class="cd-date">2017年8月22日</span>#}
+{#		</div>#}
+{#	</div>#}
+{#	<div class="cd-timeline-block">#}
+{#		<div class="cd-timeline-icon">#}
+{#			<i class="ion-clock"></i>#}
+{#		</div>#}
+{#		<div class="cd-timeline-content">#}
+{#			<h2><strong>起步</strong></h2>#}
+{#			<p>开始学习Django，从零开始开发。</p>#}
+{#			<span class="cd-date">2017年8月</span>#}
+{#		</div>#}
+{#	</div>#}
 </section>
 {% endblock main %}

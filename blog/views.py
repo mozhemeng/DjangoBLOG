@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Post, Category, Tag
+from .models import Post, Category, Tag, Timeline
 import markdown
 from comments.forms import CommentForm
 from django.views.generic import ListView, DetailView
@@ -10,6 +10,8 @@ from django.db.models import Q
 from .forms import EmailForm
 from django.core.mail import send_mail
 from django.db.models import Count
+from django.contrib import messages
+from blog.tasks import sendemail
 
 
 class IndexView(ListView):
@@ -143,6 +145,8 @@ def email_share(request, pk):
             subject = "{}分享给您来自 MZM's Blog 的文章:{}".format(data['name'], post.title)
             message = "文章题目：{}\n阅读地址：{} \n分享留言:{}".format(post.title, post_url, data['comment'])
             send_mail(subject, message, 'moflasky@163.com', [data['to']])
+            #sendemail.delay(subject, message, [data['to']])
+            messages.success(request, '邮件已发送，分享成功！')
             return redirect(post)
     else:
         form = EmailForm()
@@ -150,4 +154,5 @@ def email_share(request, pk):
 
 
 def about_me(request):
-    return render(request, 'blog/aboutme.html')
+    timelines = Timeline.objects.all()
+    return render(request, 'blog/aboutme.html', {'timelines': timelines})

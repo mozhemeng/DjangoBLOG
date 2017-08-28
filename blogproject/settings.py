@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '_yrme18&)a=cr1j%@wj&t%$*!bs(8!ph11w60yw@vf$tdk!7hu'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost ', '120.24.184.76']
 
@@ -121,7 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 #STATICFILES_DIRS = [os.path.join(BASE_DIR, "static"),]
 
 
@@ -145,3 +145,12 @@ EMAIL_PORT = 25
 EMAIL_HOST_USER = 'moflasky@163.com'
 EMAIL_HOST_PASSWORD = 'flask123456'
 EMAIL_USE_TLS = True
+
+
+#celery
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/0'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'

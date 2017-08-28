@@ -63,3 +63,15 @@ class Post(models.Model):
 
     class Meta:
         ordering = ['-created_time']
+
+
+class Timeline(models.Model):
+    title = models.CharField(max_length=70, verbose_name='标题')
+    body = models.TextField(verbose_name='内容')
+    created_time = models.DateField(verbose_name='创建时间')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-created_time']
